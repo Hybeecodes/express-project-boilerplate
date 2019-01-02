@@ -28,8 +28,12 @@ passport.deserializeUser(function(id, done) {
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+
+router.get('/signup', function(req, res, next) {
+  res.render('signup');
 });
 
 
