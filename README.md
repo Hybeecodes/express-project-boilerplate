@@ -2,7 +2,7 @@
 > An boilerplate express project for nodejs Developers.
 
 ## Installation
-You can clone the repo -- git clone https://github.com/Hybeecodes/express-project-boilerplate.git  OR clone the download button
+You can clone the repo -- git clone https://github.com/Hybeecodes/express-project-boilerplate.git  OR click the download button
 
 ## Development Setup
 After Installation,
