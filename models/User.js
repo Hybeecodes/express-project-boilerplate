@@ -6,7 +6,9 @@ const UserSchema = new Schema({
     firstname: {type:String, required:true},
     lastname: { type:String, required:true, min:6},
     email: {type:String, required:true},
-    password: { type:String, required:true, min:6}
+    password: { type:String, required:true, min:6},
+    resetPassToken: {type:String},
+    resetPassExp: {type: Date}
 });
 
 UserSchema.methods.verifyPassword = function(password) {
