@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('flash');
 require('dotenv').config();
 
 // Database Connection
@@ -29,6 +30,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
   }));
+  app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

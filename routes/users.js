@@ -8,9 +8,7 @@ const mail = require('../nodeMailerWithTemp');
 // const ensureLoggedIn = require('../middleware/ensureLoggedIn');
 const nodemailer = require('nodemailer');
 const uniString = require('unique-string');
-var key = '217764a52f15fcd6e5dc68df6a385cb274d7cf379e4199e82815b3ef3aa9f1b72b51eb899957ae4c7985d66497b80c9kaFFzViUZ0FFes5p';
-// Create an encryptor:
-var encryptor = require('simple-encryptor')(key);
+
 
 // local strategy configuration
 passport.use(new LocalStrategy(
@@ -56,18 +54,26 @@ router.get('/signup', function(req, res, next) {
 
 router.post('/signup',(req,res,next) => {
   const {firstname, lastname, email, password } = req.body;
-
-  const user = new User({
-    firstname,
-    lastname,
-    email,
-    password: bcrypt.hashSync(password)
-  });
-  user.save((err,user)=>{
+  User.findOne({email},(err,user) => {
     if(user){
-      res.redirect('/users/login');
+      req.flash('warning','Sorry, User Exists Already');
+      res.redirect('/users/signup');
+    }else{
+      const user = new User({
+        firstname,
+        lastname,
+        email,
+        password: bcrypt.hashSync(password)
+      });
+      user.save((err,user)=>{
+        if(user){
+          req.flash('success','Registration Successfull');
+          res.redirect('/users/login');
+        }
+      })
     }
   })
+  
 });
 
 router.get('/forgot-password',(req,res,next)=> {
